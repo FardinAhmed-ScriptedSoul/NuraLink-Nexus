@@ -32,7 +32,7 @@ process.on('uncaughtException', (error) => {
         // const io = new Server(server, { cors: { origin: ... } });
 
         // 3. Mount listen parameters
-        server.listen(config.port, () => {
+        server.listen(config.port || 4000, () => {
             console.log(`================================================================`);
             console.log(`📡 NURALINK NEXUS OPERATIONAL NETWORK MATRIX ONLINE`);
             console.log(`🚀 INSTANCE TARGET ADDRESS PORT: http://localhost:${config.port}`);

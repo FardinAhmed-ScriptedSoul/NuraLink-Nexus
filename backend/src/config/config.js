@@ -11,6 +11,12 @@ if (!process.env.JWT_SECRET) {
     process.exit(1);
 }
 
+// 🛰️ Redis REST Infrastructure Validation Guards
+if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    console.error("❌ FATAL CONFIGURATION ERROR: Upstash Redis REST URL or Token configurations are missing.");
+    process.exit(1);
+}
+
 // 📧 Mail Infrastructure Configuration Validation Guards
 const requiredMailEnvVars = ['EMAIL_USER', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'REFRESH_TOKEN'];
 const missingMailVars = requiredMailEnvVars.filter(key => !process.env[key]);
@@ -30,8 +36,10 @@ const config = {
         secret: process.env.JWT_SECRET,
         expiresIn: process.env.JWT_EXPIRES_IN || '7d'
     },
+    // Updated configuration mapping to match Upstash's REST API requirements
     redis: {
-        uri: process.env.REDIS_URL || null
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN
     },
     google: {
         genApiKey: process.env.GOOGLE_GEN_API_KEY || null

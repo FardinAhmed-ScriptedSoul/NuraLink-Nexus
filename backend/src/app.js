@@ -47,6 +47,17 @@ app.get('/api/v1/health', (req, res) => {
 // app.use('/api/v1/server', serverRouter);
 // app.use('/api/v1/sandbox', sandboxRouter);
 
+
+/**
+ * @routebinding authRouter
+ * @description Authentication and registration endpoint cluster
+ * @access Public (with protected routes nested within)
+ */
+// import authRouter from './routes/auth.routes.js'; // Uncomment when auth routes are implemented
+import authRoutes from './routes/atuh.routes.js';
+// ... inside your application configuration block:
+app.use('/api/v1/auth', authRoutes);
+
 // ==========================================
 // 🚨 GLOBAL FAULT-TOLERANCE EXCEPTION RADAR
 // ==========================================
